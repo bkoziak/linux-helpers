@@ -1,0 +1,34 @@
+#!/bin/bash
+
+###TODO
+# Some info about requirements and configuration
+# handle multiple input params (movie files)
+# check if vlc is installed
+# check if napi scripts are available
+  # if are, check for subtitles 
+  # if no, echo msg to terminal
+# Do something with blocking terminal
+# Maybe one vlc per each file instead of one vlc for all files?
+# Instead of functions and aliases use executable scripts in path
+
+film_function(){
+  vlc --fullscreen $* vlc://quit 
+  bk_timer 
+  # dodać info o tym, że trzeba skonfigurowac shutdown zeby sudo shutdown nie wymagało hasła
+  sudo shutdown -h now
+}
+
+
+function _sandbox(){
+  echo $*
+}
+
+bk_timer(){
+  counter=${1:-45}
+  for (( i = $counter; i > 0; i--))
+  do
+    echo "Shutting down... $i"
+    sleep 1
+  done
+
+}
